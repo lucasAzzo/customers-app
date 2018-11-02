@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 const CustomerListItem = ({name,editAction,delAction, urlPath, dni}) => {
     return (
         <div>
-            <div class="customers-list-item">
+            <div className="customers-list-item">
                 <div className="field">
                     <Link to={`${urlPath}${dni}`}>{name}</Link>
                 </div>
