@@ -11,9 +11,10 @@ import { getCustomers } from '../selectors/customers';
 class CustomersContainer extends Component {
 
     componentDidMount() {
-        this.props.fetchCustomers();
+        if (this.props.customers.length === 0) {
+            this.props.fetchCustomers();
+        }
     }
-    
 
     handleAddNew = () => {
         this.props.history.push('/customers/new');
@@ -23,7 +24,7 @@ class CustomersContainer extends Component {
         <div>
             <CustomersList customers={customers} urlPath={'customers/'}></CustomersList>
             <CustomerActions>
-                <button onClick={this.handleAddNew}>Nuevo Cliente</button>
+                <button type="button" onClick={this.handleAddNew}>Nuevo Cliente</button>
             </CustomerActions>
         </div>
     );
@@ -46,10 +47,10 @@ CustomersContainer.defaultProps = {
     customers: []
 };
 
-const mapDispathToProps = {fetchCustomers };
+const mapDispathToProps = { fetchCustomers };
 
 const mapStateToProps = state => ({
     customers: getCustomers(state)
 });
 
-export default withRouter(connect(mapStateToProps,mapDispathToProps)(CustomersContainer));
+export default withRouter(connect(mapStateToProps, mapDispathToProps)(CustomersContainer));
